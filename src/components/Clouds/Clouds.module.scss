@@ -1,0 +1,24 @@
+.clouds {
+  border-bottom: 1px solid black;
+  color: #000;
+  font-size: 24px;
+  font-weight: 600;
+  p {
+    color: black;
+  }
+  ul {
+    padding: 0 0 0 10px;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: black;
+      span {
+        margin-right: 10px;
+      }
+    }
+  }
+}

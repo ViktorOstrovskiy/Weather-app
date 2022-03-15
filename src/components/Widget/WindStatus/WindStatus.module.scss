@@ -1,0 +1,21 @@
+.windStatus {
+  color: #000;
+  background-color: #f8f8f8;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.493);
+  border-radius: 20px;
+  padding: 30px;
+  padding-top: 5px;
+  text-align: center;
+  width: 60%;
+  height: 60%;
+  h3 {
+    margin-top: 0px;
+    font-size: 15px;
+    color: rgba(83, 83, 83, 0.685);
+  }
+  p {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 500;
+  }
+}
