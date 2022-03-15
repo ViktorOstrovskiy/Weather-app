@@ -1,12 +1,16 @@
 import * as React from "react";
+import { useDispatch } from "react-redux";
+
+// function
 import {
   setCounters,
   weathers,
   weathersCity,
 } from "../../store/from-service/action";
-import s from "../ButtonGps/ButtonGps.module.scss";
-import { useDispatch } from "react-redux";
+// img
 import home from "../../assets/img/home.png";
+// styles
+import s from "../ButtonGps/ButtonGps.module.scss";
 
 const ButtonGps = () => {
   const dispatch = useDispatch();

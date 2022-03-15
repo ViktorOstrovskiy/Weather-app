@@ -1,13 +1,15 @@
 import * as React from "react";
-import s from "../Clouds/Clouds.module.scss";
 import { useSelector } from "react-redux";
-import { IWeatherReducer } from "../../store/types";
+// types
+import { CurWeather, IWeatherReducer } from "../../store/types";
+// styles
+import s from "../Clouds/Clouds.module.scss";
 
 const Clouds = () => {
   const { weatherCity } = useSelector(
     (state: IWeatherReducer) => state.weathers
   );
-  const clouds = weatherCity.clouds?.all;
+  const clouds: CurWeather = weatherCity.clouds?.all;
   return (
     <div className={s.clouds}>
       <p>Weather Details:</p>

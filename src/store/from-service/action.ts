@@ -1,16 +1,18 @@
+import { Dispatch } from "react";
 import { WEATHER_CITY, WEATHER_DAYS, SET_COUNTS } from "../action-types";
 import instance from "../../axios/instance";
-import { Dispatch } from "react";
+// types
+import { CurWeather, ICoord, IWeatherAll } from "../types";
 
 export const weathers =
   () =>
   async (dispatch: Dispatch, getState: any): Promise<void> => {
     const apiKey = "ed2569a9d32e582df59b1bda438d168c";
-    const { counter } = getState().weathers;
+    const { placeRequest } = getState().weathers;
 
     try {
       const { data } = await instance.get(
-        `onecall?lat=${counter.lat}&lon=${counter.lng}&units=metric&units=imperial&exclude={part}&appid=${apiKey}`
+        `onecall?lat=${placeRequest.lat}&lon=${placeRequest.lng}&units=metric&units=imperial&exclude={part}&appid=${apiKey}`
       );
       const weatherDays = data;
       console.log(data, "data");
@@ -22,31 +24,33 @@ export const weathersCity =
   () =>
   async (dispatch: Dispatch, getState: any): Promise<void> => {
     const apiKey = "ed2569a9d32e582df59b1bda438d168c";
-    const { counter } = getState().weathers;
+    const { placeRequest } = getState().weathers;
 
     try {
       const { data } = await instance.get(
-        `weather?lat=${counter.lat}&lon=${counter.lng}&units=metric&appid=${apiKey}`
+        `weather?lat=${placeRequest.lat}&lon=${placeRequest.lng}&units=metric&appid=${apiKey}`
       );
       const city = data;
+      console.log("city", city);
+
       dispatch(setWeatherCity(city));
     } catch (err) {}
   };
 
-const setWeatherCity = (data: object) => {
+const setWeatherCity = (data: CurWeather) => {
   return {
     type: WEATHER_CITY,
     payload: data,
   };
 };
-const setWeatherDays = (data: object) => {
+const setWeatherDays = (data: IWeatherAll) => {
   return {
     type: WEATHER_DAYS,
     payload: data,
   };
 };
 
-export const setCounters = (data: object) => {
+export const setCounters = (data: ICoord) => {
   return {
     type: SET_COUNTS,
     payload: data,

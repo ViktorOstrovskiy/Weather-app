@@ -1,15 +1,22 @@
 import * as React from "react";
-import s from "../Header/Header.module.scss";
 import { useEffect, useState } from "react";
-import { weathers } from "../../store/from-service/action";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { nanoid } from "nanoid";
+// function
+import { weathers } from "../../store/from-service/action";
+//components
 import { Button } from "../../shared";
-import { IWeatherReducer } from "../../store/types";
+// types
+import { IWeatherAll, IWeatherReducer } from "../../store/types";
+// styles
+import s from "../Header/Header.module.scss";
+
 const HeaderTest = () => {
   const dispatch = useDispatch();
-  const { weather } = useSelector((state: IWeatherReducer) => state.weathers);
+  const { weather }: IWeatherReducer = useSelector(
+    (state: IWeatherReducer) => state.weathers
+  );
   const baseImgUrl = "http://openweathermap.org/img/wn/";
   const [temp, setTemp] = useState(false);
   const [changeWeather, setChangeWeather] = useState(true);
@@ -19,7 +26,7 @@ const HeaderTest = () => {
   }, []);
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const countTemp = (data: number) => {
+  const countTemp = (data: number): string => {
     if (!temp) {
       return Math.round(data) + " °C";
     } else {
@@ -27,8 +34,8 @@ const HeaderTest = () => {
     }
   };
 
-  const { hourly } = weather;
-  const { daily } = weather;
+  const { hourly } = weather as IWeatherAll;
+  const { daily } = weather as IWeatherAll;
   console.log("ds", hourly);
   return (
     <div className={s.header}>

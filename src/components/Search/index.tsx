@@ -1,20 +1,28 @@
 import * as React from "react";
-import s from "../Search/search.module.scss";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { FC } from "react";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
+// function
 import {
   setCounters,
   weathers,
   weathersCity,
 } from "../../store/from-service/action";
-import { useDispatch } from "react-redux";
+//components
 import ButtonGps from "../ButtonGps";
+// style
+import s from "../Search/search.module.scss";
 
-const Search = ({ isLoaded }: any) => {
+type SearchProps = {
+  isLoaded: boolean;
+};
+
+const Search: FC<SearchProps> = ({ isLoaded }) => {
   const dispatch = useDispatch();
   const {
     ready,

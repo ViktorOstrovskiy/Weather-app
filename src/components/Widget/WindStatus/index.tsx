@@ -1,11 +1,16 @@
 import * as React from "react";
-import s from "../WindStatus/WindStatus.module.scss";
 import { useSelector } from "react-redux";
-import { IWeatherReducer } from "../../../store/types";
+// types
+import { IDaily, IWeatherAll, IWeatherReducer } from "../../../store/types";
+// styles
+import s from "../WindStatus/WindStatus.module.scss";
+
 const WindStatus = () => {
-  const { weather } = useSelector((state: IWeatherReducer) => state.weathers);
-  const { daily } = weather;
-  const windStatus = (daily || []).map((wind: any) => wind.wind_speed);
+  const { weather }: IWeatherReducer = useSelector(
+    (state: IWeatherReducer) => state.weathers
+  );
+  const { daily } = weather as IWeatherAll;
+  const windStatus = (daily || []).map((wind: IDaily) => wind.wind_speed);
 
   return (
     <div className={s.windStatus}>

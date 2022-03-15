@@ -1,12 +1,17 @@
 import * as React from "react";
-import s from "../UVI/UVI.module.scss";
 import { useSelector } from "react-redux";
-import { IWeatherReducer } from "../../../store/types";
+// types
+import { IDaily, IWeatherAll, IWeatherReducer } from "../../../store/types";
+// styles
+import s from "../UVI/UVI.module.scss";
+
 const Uvi = () => {
-  const { weather } = useSelector((state: IWeatherReducer) => state.weathers);
-  const { daily } = weather;
-  const uvi = (daily || []).map((item: any) => item.uvi);
-  const uviIndex = (uvi: any) => {
+  const { weather }: IWeatherReducer = useSelector(
+    (state: IWeatherReducer) => state.weathers
+  );
+  const { daily } = weather as IWeatherAll;
+  const uvi = (daily || []).map((item: IDaily) => item.uvi);
+  const uviIndex = (uvi: IDaily | number) => {
     return uvi === 0
       ? 0
       : uvi <= 2

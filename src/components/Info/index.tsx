@@ -1,12 +1,15 @@
 import * as React from "react";
-import s from "../Info/Info.module.scss";
 import { useEffect } from "react";
-import { weathersCity } from "../../store/from-service/action";
 import { useDispatch, useSelector } from "react-redux";
-import { IWeatherReducer } from "../../store/types";
+// function
+import { weathersCity } from "../../store/from-service/action";
+// types
+import { CurWeather, IWeatherReducer } from "../../store/types";
+// styles
+import s from "../Info/Info.module.scss";
 
 const Info = () => {
-  const { weatherCity } = useSelector(
+  const { weatherCity }: IWeatherReducer = useSelector(
     (state: IWeatherReducer) => state.weathers
   );
   const dispatch = useDispatch();
@@ -24,23 +27,24 @@ const Info = () => {
   ];
   const baseImgUrl = "http://openweathermap.org/img/wn/";
 
-  const cityName = weatherCity.name;
-  const cityTemp = weatherCity.main?.temp;
-  const cityDay = weatherCity.dt;
-  const country = weatherCity.sys?.country;
-  const cityTime = weatherCity.timezone;
-  const img = (weatherCity.weather || []).map((icon: any) => icon.icon);
+  const { name } = weatherCity as CurWeather;
+  const { main } = weatherCity as CurWeather;
+  const { dt } = weatherCity as CurWeather;
+  const { sys } = weatherCity as CurWeather;
+  // const cityTime = weatherCity.timezone;
+  const { weather } = weatherCity as CurWeather;
+  const img = (weather || []).map((icon) => icon.icon);
   return (
     <div className={s.info}>
       <img src={`${baseImgUrl}${img}@2x.png`} alt="" />
-      <h1>{Math.round(cityTemp)}°</h1>
+      <h1>{Math.round(main ? main.temp : 0)}°</h1>
       <div>
         <h3>
-          {cityName},{country}
+          {name},{sys ? sys.country : null}
         </h3>
 
         <p className={s.day}>
-          {days[new Date(cityDay * 1000).getDay()]}
+          {days[new Date(dt * 1000).getDay()]}
           {/* {new Date(cityTime).getHours()}:{new Date(cityTime).getMinutes()} */}
         </p>
       </div>

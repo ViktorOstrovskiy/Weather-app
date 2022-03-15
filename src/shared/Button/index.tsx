@@ -1,12 +1,26 @@
 import * as React from "react";
+import { FC } from "react";
 import { Button as MuiButton } from "@mui/material";
 import { MuiButtonStyles } from "./muiStyles";
 import { makeStyles } from "@mui/styles";
+// styles
 import cx from "classnames";
 
 const useStyles = makeStyles(MuiButtonStyles);
 
-export const Button = ({
+type ButtonProps = {
+  title?: string;
+  onClick?: () => void;
+  temp?: boolean;
+  variant?: string;
+  disabled?: boolean;
+  tempChange?: boolean;
+  days?: boolean;
+  daysChange?: boolean;
+  type?: string;
+};
+
+export const Button: FC<ButtonProps> = ({
   onClick,
   variant,
   disabled,

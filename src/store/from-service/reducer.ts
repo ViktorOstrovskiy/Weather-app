@@ -1,10 +1,11 @@
 import { WEATHER_CITY, WEATHER_DAYS, SET_COUNTS } from "../action-types";
+// types
 import { ActionTypes, IWeatherReducer } from "../types";
 
 const initialState: IWeatherReducer = {
   weatherCity: {},
   weather: {},
-  counter: {
+  placeRequest: {
     lat: 49.2328,
     lng: 28.481,
   },
@@ -27,7 +28,7 @@ const reducer = (state = initialState, action: ActionTypes) => {
     case SET_COUNTS:
       return {
         ...state,
-        counter: payload,
+        placeRequest: payload,
       };
 
     default:

@@ -1,13 +1,15 @@
 import * as React from "react";
-import s from "../Visibility/Visibility.module.scss";
 import { useSelector } from "react-redux";
-import { IWeatherReducer } from "../../../store/types";
+// types
+import { CurWeather, IWeatherReducer } from "../../../store/types";
+// styles
+import s from "../Visibility/Visibility.module.scss";
 
 const Visibility = () => {
-  const { weatherCity } = useSelector(
+  const { weatherCity }: IWeatherReducer = useSelector(
     (state: IWeatherReducer) => state.weathers
   );
-  const visibility = weatherCity.visibility;
+  const { visibility } = weatherCity as CurWeather;
   return (
     <div className={s.visibility}>
       <h3>Visibility</h3>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import s from "../Conteiner/Conteiner.module.scss";
+// components
 import HeaderTest from "../Header";
 import Search from "../Search";
 import Uvi from "../Widget/UVI";
@@ -11,11 +11,13 @@ import Temperature from "../Widget/Temperature";
 import Map from "../Map";
 import Info from "../Info";
 import Clouds from "../Clouds";
+// styles
+import s from "../Container/Container.module.scss";
 
 import { useJsApiLoader } from "@react-google-maps/api";
 const libraries: any = ["places"];
 
-const Conteiner = () => {
+const Container = () => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDqWzH2QpbASgwk9GuDZVODffALDYuqopI",
@@ -52,4 +54,4 @@ const Conteiner = () => {
   );
 };
 
-export default Conteiner;
+export default Container;

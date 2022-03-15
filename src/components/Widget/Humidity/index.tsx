@@ -1,14 +1,18 @@
 import * as React from "react";
-import s from "../Humidity/Humidity.module.scss";
 import { useSelector } from "react-redux";
-import { IWeatherReducer } from "../../../store/types";
+// types
+import { IDaily, IWeatherAll, IWeatherReducer } from "../../../store/types";
+// styles
+import s from "../Humidity/Humidity.module.scss";
 
 const Humidity = () => {
-  const { weather } = useSelector((state: IWeatherReducer) => state.weathers);
-  const { daily } = weather;
-  const humidity = (daily || []).map((humidity: any) => humidity.humidity);
+  const { weather }: IWeatherReducer = useSelector(
+    (state: IWeatherReducer) => state.weathers
+  );
+  const { daily } = weather as IWeatherAll;
+  const humidity = (daily || []).map((humidity: IDaily) => humidity.humidity);
 
-  const humudityPer = (humidity: any) => {
+  const humudityPer = (humidity: IDaily | number): string => {
     return !humidity
       ? ""
       : humidity >= 70

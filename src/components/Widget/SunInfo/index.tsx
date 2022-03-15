@@ -1,15 +1,21 @@
 import * as React from "react";
-import s from "../SunInfo/SunInfo.module.scss";
 import { useSelector } from "react-redux";
+// img
 import sunRises from "../../../assets/img/sunrise.png";
 import sunSets from "../../../assets/img/sunset.png";
-import { IWeatherReducer } from "../../../store/types";
-const SunInfo = () => {
-  const { weather } = useSelector((state: IWeatherReducer) => state.weathers);
-  const { daily } = weather;
+// types
+import { IDaily, IWeatherAll, IWeatherReducer } from "../../../store/types";
+// styles
+import s from "../SunInfo/SunInfo.module.scss";
 
-  const sunRise = (daily || []).map((sun: any) => sun.sunrise);
-  const sunSet = (daily || []).map((sun: any) => sun.sunset);
+const SunInfo = () => {
+  const { weather }: IWeatherReducer = useSelector(
+    (state: IWeatherReducer) => state.weathers
+  );
+  const { daily } = weather as IWeatherAll;
+
+  const sunRise = (daily || []).map((sun: IDaily) => sun.sunrise);
+  const sunSet = (daily || []).map((sun: IDaily) => sun.sunset);
 
   return (
     <div className={s.suninfo}>

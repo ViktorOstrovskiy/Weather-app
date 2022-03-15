@@ -1,8 +1,10 @@
 import * as React from "react";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import s from "../Map/Map.module.scss";
+import { GoogleMap } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
+// types
 import { IWeatherReducer } from "../../store/types";
+// styles
+import s from "../Map/Map.module.scss";
 
 const containerStyle = {
   width: "100%",
@@ -23,13 +25,16 @@ const defaultOptions = {
   fullScreenControl: false,
 };
 const Map = () => {
-  const { counter } = useSelector((state: IWeatherReducer) => state.weathers);
+  const { placeRequest } = useSelector(
+    (state: IWeatherReducer) => state.weathers
+  );
+  console.log("COOO", placeRequest);
 
   return (
     <div className={s.map}>
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={counter}
+        center={placeRequest}
         zoom={10}
         options={defaultOptions}
       ></GoogleMap>

@@ -1,16 +1,21 @@
 import * as React from "react";
-import s from "../Temperature/Temperature.module.scss";
 import { useSelector } from "react-redux";
+// img
 import hot from "../../../assets/img/hot.png";
 import cold from "../../../assets/img/cold.png";
-import { IWeatherReducer } from "../../../store/types";
+// types
+import { IDaily, IWeatherAll, IWeatherReducer } from "../../../store/types";
+// styles
+import s from "../Temperature/Temperature.module.scss";
 
 const Temperature = () => {
-  const { weather } = useSelector((state: IWeatherReducer) => state.weathers);
-  const { daily } = weather;
+  const { weather }: IWeatherReducer = useSelector(
+    (state: IWeatherReducer) => state.weathers
+  );
+  const { daily } = weather as IWeatherAll;
 
-  const min = (daily || []).map((temp: any) => temp.temp.min);
-  const max = (daily || []).map((temp: any) => temp.temp.max);
+  const min = (daily || []).map((temp: IDaily) => temp.temp.min);
+  const max = (daily || []).map((temp: IDaily) => temp.temp.max);
 
   return (
     <div className={s.temperature}>
