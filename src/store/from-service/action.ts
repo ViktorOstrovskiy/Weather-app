@@ -1,4 +1,4 @@
-import { Dispatch } from "react";
+import { Dispatch } from "redux";
 import { WEATHER_CITY, WEATHER_DAYS, SET_COUNTS } from "../action-types";
 import instance from "../../axios/instance";
 // types
