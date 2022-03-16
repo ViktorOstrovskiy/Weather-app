@@ -11,3 +11,7 @@ declare module "*.svg" {
   const content: any;
   export default content;
 }
+declare module "*dayjs/locale/es" {
+  const content: any;
+  export default content;
+}

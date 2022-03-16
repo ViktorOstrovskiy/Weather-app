@@ -28,7 +28,6 @@ const Map = () => {
   const { placeRequest }: IWeatherReducer = useSelector(
     (state: IWeatherReducer) => state.weathers
   );
-  console.log("COOO", placeRequest);
 
   return (
     <div className={s.map}>

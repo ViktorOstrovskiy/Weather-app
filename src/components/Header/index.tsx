@@ -17,6 +17,7 @@ const HeaderTest = () => {
   const { weather }: IWeatherReducer = useSelector(
     (state: IWeatherReducer) => state.weathers
   );
+
   const baseImgUrl = "http://openweathermap.org/img/wn/";
   const [temp, setTemp] = useState(false);
   const [changeWeather, setChangeWeather] = useState(true);
@@ -36,7 +37,6 @@ const HeaderTest = () => {
 
   const { hourly } = weather as IWeatherAll;
   const { daily } = weather as IWeatherAll;
-  console.log("ds", hourly);
   return (
     <div className={s.header}>
       <div className={s.header__btns}>
