@@ -1,4 +1,6 @@
 import * as React from "react";
+import { apiGoogle } from "../../api";
+
 // components
 import HeaderTest from "../Header";
 import Search from "../Search";
@@ -20,7 +22,7 @@ const libraries: any = ["places"];
 const Container = () => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyDqWzH2QpbASgwk9GuDZVODffALDYuqopI",
+    googleMapsApiKey: apiGoogle,
     libraries,
   });
   return (
