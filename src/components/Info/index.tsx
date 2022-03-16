@@ -27,10 +27,8 @@ const Info = () => {
   ];
   const baseImgUrl = "http://openweathermap.org/img/wn/";
 
-  const { name } = weatherCity as CurWeather;
-  const { main } = weatherCity as CurWeather;
-  const { dt } = weatherCity as CurWeather;
-  const { sys } = weatherCity as CurWeather;
+  const { name, main, dt, sys } = weatherCity as CurWeather;
+
   // const cityTime = weatherCity.timezone;
   const { weather } = weatherCity as CurWeather;
   const img = (weather || []).map((icon) => icon.icon);
