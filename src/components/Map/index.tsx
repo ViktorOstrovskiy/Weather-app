@@ -25,7 +25,7 @@ const defaultOptions = {
   fullScreenControl: false,
 };
 const Map = () => {
-  const { placeRequest } = useSelector(
+  const { placeRequest }: IWeatherReducer = useSelector(
     (state: IWeatherReducer) => state.weathers
   );
   console.log("COOO", placeRequest);

@@ -35,10 +35,10 @@ const Info = () => {
   return (
     <div className={s.info}>
       <img src={`${baseImgUrl}${img}@2x.png`} alt="" />
-      <h1>{Math.round(main ? main.temp : 0)}°</h1>
+      <h1>{Math.round(main?.temp)}°</h1>
       <div>
         <h3>
-          {name},{sys ? sys.country : null}
+          {name},{sys?.country}
         </h3>
 
         <p className={s.day}>
