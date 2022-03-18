@@ -8,12 +8,12 @@ import * as utc from "dayjs/plugin/utc";
 // function
 import { weathersCity } from "../../store/from-service/action";
 // types
-import { CurWeather, IWeatherReducer } from "../../store/types";
+import { CurWeather, IWeatherAll, IWeatherReducer } from "../../store/types";
 // styles
 import s from "../Info/Info.module.scss";
 
 const Info = () => {
-  const { weatherCity, weather } = useSelector(
+  const { weatherCity, weather }: IWeatherReducer = useSelector(
     (state: IWeatherReducer) => state.weathers
   );
   const dispatch = useDispatch();
@@ -31,8 +31,8 @@ const Info = () => {
 
   const { name, main, sys } = weatherCity as CurWeather;
 
-  const cityTime = weather.timezone;
-  const weathers = weatherCity.weather;
+  const cityTime = (weather as IWeatherAll).timezone;
+  const weathers = (weatherCity as CurWeather).weather;
   const img = (weathers || []).map((icon: any) => icon.icon);
 
   return (
