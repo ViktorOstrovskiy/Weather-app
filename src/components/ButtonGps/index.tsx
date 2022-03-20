@@ -1,28 +1,43 @@
+/* eslint-disable react/function-component-definition */
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-
 // function
-import { setCounters, weathers, weathersCity } from '../../store/from-service/action';
+import { getWeathers, getWeathersInfoByCity } from 'store/weather-service/action';
+import { setCoordinates } from 'store/location-service/action';
 // img
-import home from '../../assets/img/home.png';
+import home from 'assets/img/home.png';
 // styles
-import s from '../ButtonGps/ButtonGps.module.scss';
+import s from './ButtonGps.module.scss';
 
-const ButtonGps = () => {
+const ButtonGps: FC = () => {
 	const dispatch = useDispatch();
 
-	const getUserLocation = () => {
+	const getUserLocation = (): void => {
 		navigator.geolocation.getCurrentPosition(
 			position => {
 				dispatch(
-					setCounters({
+					setCoordinates({
 						lat: position.coords.latitude,
 						lng: position.coords.longitude,
 					})
 				);
-				dispatch(weathers());
-				dispatch(weathersCity());
+				dispatch(
+					getWeathers({
+						lat: position.coords.latitude,
+						lng: position.coords.longitude,
+					})
+				);
+
+				dispatch(
+					getWeathersInfoByCity({
+						lat: position.coords.latitude,
+						lng: position.coords.longitude,
+					})
+				);
 			},
-			error => {}
+			error => {
+				console.log(error);
+			}
 		);
 	};
 

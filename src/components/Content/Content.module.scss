@@ -1,0 +1,14 @@
+.wrapper {
+	padding-left: 50px;
+	background: rgba(236, 233, 233, 0.89);
+	h2 {
+		font-size: 18px;
+		margin-bottom: 20px;
+	}
+	.header {
+		display: grid;
+		grid-gap: 20px;
+		grid-template-columns: 1fr 300px;
+		padding-bottom: 0px;
+	}
+}

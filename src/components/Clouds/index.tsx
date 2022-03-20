@@ -1,19 +1,21 @@
+/* eslint-disable react/function-component-definition */
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
+import { cityWeatherDataSelector } from 'store/weather-service/selectors';
 // types
-import { CurWeather, IWeatherReducer } from '../../store/types';
+import { CurrentWeather } from 'core/types';
 // styles
-import s from '../Clouds/Clouds.module.scss';
+import s from './Clouds.module.scss';
 
-const Clouds = () => {
-	const { weatherCity } = useSelector((state: IWeatherReducer) => state.weathers);
-	const clouds: CurWeather = weatherCity.clouds?.all;
+const Clouds: FC = () => {
+	const { clouds }: CurrentWeather = useSelector(cityWeatherDataSelector);
 	return (
 		<div className={s.clouds}>
 			<p>Weather Details:</p>
 			<ul>
 				<li>
 					<span>Clouds</span>
-					<span>{clouds}%</span>
+					<span>{clouds?.all}%</span>
 				</li>
 			</ul>
 		</div>

@@ -1,3 +1,3 @@
-export const WEATHER_CITY = "WEATHER_CITY";
-export const WEATHER_DAYS = "WEATHER_DAYS";
-export const SET_COUNTS = "SET_COUNTS";
+export const GET_INFO_BY_CITY = 'GET_INFO_BY_CITY';
+export const GET_WHEATHER_ALL = 'GET_WHEATHER_ALL';
+export const SET_COORDINATES = 'SET_COORDINATES';
