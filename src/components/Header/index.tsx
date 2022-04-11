@@ -1,77 +1,64 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+/* eslint-disable react/function-component-definition */
+import { FC, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { weatherAllSelector } from 'store/weather-service/selectors';
 import { nanoid } from 'nanoid';
-// function
-import { weathers } from '../../store/from-service/action';
-//components
-import { Button } from '../../shared';
 // types
-import { IWeatherAll, IWeatherReducer } from '../../store/types';
+import { Daily, Hourly, WeatherAll } from 'core/types';
+// helpers
+import { countTempatureValueByType } from 'core/helpers';
+// consts
+import { BASE_ICONS_URL, days } from 'core/constants';
+// components
+import { Button } from 'components/shared';
 // styles
 import s from './Header.module.scss';
 
-const HeaderTest = () => {
-	const dispatch = useDispatch();
-	const { weather }: IWeatherReducer = useSelector((state: IWeatherReducer) => state.weathers);
+const Header: FC = () => {
+	const weatherAll: WeatherAll = useSelector(weatherAllSelector);
 
-	const baseImgUrl = 'http://openweathermap.org/img/wn/';
-	const [temp, setTemp] = useState(false);
-	const [changeWeather, setChangeWeather] = useState(true);
+	const [temperatureValue, setTemperatureValue] = useState(false);
+	const [forecastWeekOrDay, setForecastWeekOrDay] = useState(true);
 
-	useEffect(() => {
-		dispatch(weathers());
-	}, []);
+	const temperatureCelcius = () => setTemperatureValue(false);
+	const temperatureFahrenheit = () => setTemperatureValue(true);
 
-	const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-	const countTemp = (data: number): string => {
-		if (!temp) {
-			return Math.round(data) + ' °C';
-		} else {
-			return (Math.round(data) * 9) / 5 + 32 + ' °F';
-		}
-	};
-
-	const { hourly } = weather as IWeatherAll;
-	const { daily } = weather as IWeatherAll;
 	return (
-		<div className={s.header}>
-			<div className={s.header__btns}>
-				<div className={s.header__view}>
+		<div className={s.wrapper}>
+			<div className={s.wrapper__btns}>
+				<div className={s.wrapper__view}>
 					<Button
 						variant="text"
 						title="Today"
-						days={true}
-						onClick={() => setChangeWeather(false)}
-						daysChange={!changeWeather}
+						onClick={() => setForecastWeekOrDay(false)}
+						active={!forecastWeekOrDay}
 					/>
 					<Button
 						variant="text"
 						title="Week"
-						days={true}
-						onClick={() => setChangeWeather(true)}
-						daysChange={changeWeather}
+						onClick={() => setForecastWeekOrDay(true)}
+						active={forecastWeekOrDay}
 					/>
 				</div>
-				<div className={s.header__temperature}>
-					<Button variant="text" title="°C" tempChange={!temp} temp={true} onClick={() => setTemp(false)} />
-					<Button variant="text" title="°F" temp={true} tempChange={temp} onClick={() => setTemp(true)} />
+				<div className={s.wrapper__temperature}>
+					<Button title="°C" active={!temperatureValue} onClick={temperatureCelcius} />
+					<Button title="°F" active={temperatureValue} onClick={temperatureFahrenheit} />
 				</div>
 			</div>
-			<div className={s.header__content}>
-				{(changeWeather ? daily || [] : hourly || []).slice(0, 8).map((item: any) => (
-					<div className={s.header__block} key={nanoid()}>
-						<p>{days[new Date(item.dt * 1000).getDay()]}</p>
-						<img src={`${baseImgUrl}${item.weather[0].icon}@2x.png`} alt="" />
-						{changeWeather ? (
+			<div className={s.wrapper__content}>
+				{(forecastWeekOrDay ? weatherAll.daily : weatherAll.hourly).slice(0, 8).map((temp: Daily | Hourly) => (
+					<div className={s.wrapper__block} key={nanoid()}>
+						<p>{days[new Date(temp.dt * 1000).getDay()]}</p>
+						<img src={`${BASE_ICONS_URL}${temp.weather[0].icon}@2x.png`} alt="" />
+						{forecastWeekOrDay ? (
 							<>
-								<p>{countTemp(item.temp.min)}</p>
-								<p>{countTemp(item.temp.max)}</p>
+								<p>{countTempatureValueByType((temp as Daily).temp.min, temperatureValue)}</p>
+								<p>{countTempatureValueByType((temp as Daily).temp.max, temperatureValue)}</p>
 							</>
 						) : (
 							<>
-								<p>{countTemp(item.temp)}</p>
-								<p>{new Date(item.dt * 1000).getHours()} : 00</p>
+								<p>{countTempatureValueByType(temp.temp as number, temperatureValue)}</p>
+								<p>{new Date(temp.dt * 1000).getHours()} : 00</p>
 							</>
 						)}
 					</div>
@@ -81,4 +68,4 @@ const HeaderTest = () => {
 	);
 };
 
-export default HeaderTest;
+export default Header;

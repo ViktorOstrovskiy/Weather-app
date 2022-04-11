@@ -1,0 +1,67 @@
+.wrapper {
+	border-radius: 20px;
+	padding: 30px;
+	padding-top: 5px;
+	text-align: center;
+	color: #000;
+	background-color: #f8f8f8;
+	box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.493);
+	width: 60%;
+	height: 60%;
+	h3 {
+		margin-top: 0px;
+		font-size: 15px;
+		color: rgba(83, 83, 83, 0.685);
+	}
+	&__uvi {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+	}
+	svg {
+		transform: rotate(180deg);
+	}
+	path {
+		border: 1px solid #000;
+		fill: none;
+		stroke: url('#orange-to-pink');
+		stroke-linecap: round;
+		stroke-width: 8;
+		pointer-events: none;
+	}
+}
+.gradient {
+	position: relative;
+	span {
+		position: absolute;
+		left: -15px;
+		bottom: 20px;
+		font-weight: 500;
+		font-size: 18px;
+		color: #000;
+
+		&:nth-child(3) {
+			left: 25%;
+			top: -20%;
+		}
+		&:nth-child(4) {
+			right: -100px;
+			top: -17%;
+		}
+		&:nth-child(5) {
+			right: -180px;
+			bottom: 17px;
+		}
+		&:nth-child(6) {
+			top: 50%;
+			right: -17px;
+			display: block;
+			margin-right: auto;
+			margin-left: auto;
+			width: 100%;
+			font-size: 30px;
+		}
+	}
+}

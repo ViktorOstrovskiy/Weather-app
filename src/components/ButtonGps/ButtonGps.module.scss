@@ -1,23 +1,19 @@
 .btn {
-  //   position: absolute;
-  //   right: 20px;
-  margin-left: 20px;
-  // display: block;
-  border-radius: 50%;
-  border: none;
+	margin-left: 20px;
+	border-radius: 50%;
+	border: none;
 
-  padding: 5px;
-  //   background: #f8f8f8;
-  i {
-    font-size: 20px;
-  }
+	padding: 5px;
+	i {
+		font-size: 20px;
+	}
 
-  img {
-    width: 13px;
-    height: 13px;
-  }
+	img {
+		width: 13px;
+		height: 13px;
+	}
 
-  &:hover {
-    cursor: pointer;
-  }
+	&:hover {
+		cursor: pointer;
+	}
 }
