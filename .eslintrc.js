@@ -2,7 +2,12 @@ module.exports = {
 	env: {
 		browser: true,
 		es2021: true,
+		jest: true,
 	},
+	globals: {
+		shallow: true,
+	},
+
 	extends: [
 		'plugin:react/recommended',
 		'airbnb',
@@ -66,4 +71,14 @@ module.exports = {
 			typescript: {},
 		},
 	},
+	overrides: [
+		{
+			files: '*.spec.tsx',
+			globals: {
+				shallow: true,
+				render: true,
+				mount: true,
+			},
+		},
+	],
 };

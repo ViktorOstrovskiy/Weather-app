@@ -88,6 +88,7 @@ const AutocompleteLocation: FC = () => {
 				disabled={!ready}
 				placeholder="Type address"
 				className={s.input}
+				onClick={() => setValue('')}
 			/>
 			<ButtonGps />
 			{status === 'OK' && <ul className={s.suggestions}>{memoizedSuggestions}</ul>}

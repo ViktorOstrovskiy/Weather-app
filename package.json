@@ -16,10 +16,12 @@
 		"@types/react-router-dom": "^5.3.3",
 		"@typescript-eslint/eslint-plugin": "^5.15.0",
 		"@typescript-eslint/parser": "^5.15.0",
+		"@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
 		"axios": "^0.26.0",
 		"classnames": "^2.3.1",
 		"cx": "^22.1.2",
 		"dayjs": "^1.11.0",
+		"enzyme-to-json": "^3.6.2",
 		"eslint-config-airbnb": "^19.0.4",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-import-resolver-typescript": "^2.5.0",
@@ -30,6 +32,8 @@
 		"eslint-plugin-react": "^7.29.4",
 		"eslint-plugin-react-hooks": "^4.3.0",
 		"google-map-react": "^2.1.10",
+		"identity-obj-proxy": "^3.0.0",
+		"jest-enzyme": "^7.1.2",
 		"mui": "^0.0.1",
 		"nanoid": "^3.3.1",
 		"prettier": "^2.6.0",
@@ -52,8 +56,10 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"test:coverage": "jest --coverage"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -72,5 +78,44 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
-	}
+	},
+	"devDependencies": {
+		"@babel/plugin-transform-modules-commonjs": "^7.18.0",
+		"@babel/preset-typescript": "^7.17.12",
+		"@types/enzyme": "^3.10.12",
+		"@types/jest": "^27.5.1",
+		"cheerio": "^1.0.0-rc.3",
+		"enzyme": "^3.11.0",
+		"jest": "^28.1.0",
+		"ts-jest": "^28.0.2"
+	},
+	"jest": {
+		"verbose": true,
+		"clearMocks": true,
+		"collectCoverage": true,
+		"setupFilesAfterEnv": [
+			"./config/setupTests.js"
+		],
+		"snapshotSerializers": [
+			"./node_modules/enzyme-to-json/serializer"
+		],
+		"transform": {
+			"^.+\\.(t|j)sx?$": "ts-jest"
+		},
+		"testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$"
+	},
+	"moduleNameMapper": {
+		"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "./__mocks__/fileMock.js",
+		"\\.(css|scss)$": "identity-obj-proxy",
+		"^src/(.*)": "<rootDir>/src/$1",
+		"^app/(.*)": "<rootDir>/src/app/$1",
+		"^assets/(.*)": "<rootDir>/src/assets/$1",
+		"^environments/(.*)": "<rootDir>/src/environments/$1"
+	},
+	"moduleDirectories": [
+		".",
+		"root/path",
+		"root/path/to/your/lib",
+		"node_modules"
+	]
 }
